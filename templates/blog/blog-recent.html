@@ -1,0 +1,17 @@
+<div class="widget widget-featured-posts">
+  <h4 class="widget-title">نوشته های اخیر</h4>
+  {% for post in posts %}
+  <a class="featured-post" href="{% url 'blog:blog-detail' name=post.title %}">
+    <div class="featured-post-thumb">
+      <img src="{{post.image.url}}" alt="{{post.title}}" />
+    </div>
+    <div class="featured-post-info">
+      <div class="featured-post-meta">
+        <span class="text-primary opacity-70"><i class="fe-icon-clock"></i>{{post.published_date|date:"d M Y"}}</span><span class="mr-3"><i class="fe-icon-message-square"></i>۲۱</span>
+      </div>
+      <div class="featured-post-title">{{post.title}}</div>
+    </div>
+  </a>
+  {% endfor %}
+
+</div>

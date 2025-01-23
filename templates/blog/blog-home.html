@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block search %}
+<!-- Search Button -->
+<a class="search-trigger text-white" href="#fs-search" data-toggle="fullscreen-overlay">
+  <i class="fe-icon-search"></i>
+</a>
+
+<!-- Full Screen Search-->
+<div class="fs-overlay-wrapper" id="fs-search" style="background-image: url({% static 'img/fs-overlay-bg.png' %});"><span class="fs-overlay-close"><i class="fe-icon-x"></i></span>
+  <div class="fs-overlay-inner">
+    <div class="fs-overlay-content">
+      <div class="container">
+        <form class="input-group" action="{% url 'blog:search' %}" method="get">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fe-icon-search"></i></div>
+          </div>
+          <input class="form-control" type="text" name="s" placeholder="جستجو نوشته مورد نظر...">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+  <!-- Page Content -->
+  <div class="container" style="margin-top: -160px;">
+    <div class="bg-white box-shadow pt-4 pb-5 px-3 px-sm-4 mb-4">
+      <!-- Filters -->
+      <ul class="bg-white box-shadow nav nav-tabs nav-tabs-style-2 mb-3">
+        <li class="nav-item">
+          <a class="nav-link active mt-3" href="" data-filter="*">همه&nbsp;<sup>{{total_posts}}</sup></a>
+        </li>
+        {% for cat in categories %}
+          {% if cat.post_count > 0 %}
+          <li class="nav-item mt-3">
+            <a class="nav-link" href="" data-filter=".{{ cat.name }}">{{ cat.name }}&nbsp;<sup>{{cat.post_count}}</sup></a>
+          </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <!-- Grid -->
+      <div class="isotope-grid filter-grid cols-3">
+        <div class="gutter-sizer"></div>
+        <div class="grid-sizer"></div>
+
+        <!-- Post Item Begin -->
+        {% for post in posts %}
+          <div class="grid-item {% for cat in post.categories.all %} {{ cat }} {% endfor %} mb-30">
+            <a class="d-block position-relative text-decoration-none text-center py-5" href="{% url 'blog:blog-detail' name=post.title %}">
+              <div class="img-cover" style="background-image: url({{post.image.url}});"></div>
+              <div class="bg-content pt-5 mt-5"></div>
+            </a>
+            <div class="portfolio-card">
+              <div class="portfolio-card-body">
+                <div class="portfolio-meta">
+                  <span class="ml-3"><i class="fe-icon-user"></i>{{ post.photographer.first_name }}&nbsp;{{post.photographer.last_name}}</span>
+                  <span class="ml-3"><i class="fe-icon-eye"></i>{{ post.counted_views }}</span>
+                  <a href="#"><i class="fe-icon-heart text-accent"></i>{{post.counted_likes}}</a>
+                </div>
+                <h5 class="portfolio-title"><a href="{% url 'blog:blog-detail' name=post.title %}">{{ post.title }}</a></h5>
+                {% for cat in post.categories.all %}
+                  <a class="tag-link" href="{% url 'blog:category' cat_name=cat %}">{{ cat }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="container grid-item position-relative bg-white box-shadow py-5 mt-5">
+            <h1 class="h3 text-center">متأسفانه پست مورد نظر یافت نشد!</h1>
+          </div>
+        {% endfor %}
+      </div>
+        <!-- Post Item End -->
+      <div class="pt-2">
+        <!-- Pagination Begin -->
+        <nav class="pagination bg-white box-shadow py-3 px-4">
+          {% if posts.has_previous %}
+            <a class="prev-btn" href="?page=1"><i class="fe-icon-chevron-right"></i>صفحه نخست</a>
+            <a class="prev-btn" href="?page={{ posts.previous_page_number }}"><i class="fe-icon-chevron-right"></i>صفحه قبل</a>
+          {% else %}
+            <span class="prev-btn" href=""><i class="fe-icon-chevron-right"></i>صفحه نخست</span>
+            <span class="prev-btn" href=""><i class="fe-icon-chevron-right"></i>صفحه قبل</span>
+          {% endif %}
+
+          <ul class="pages">
+          {% for post in posts.paginator.page_range %}
+            {% if posts.number == post %}
+              <li class="d-none d-sm-inline-block active"><a href="?page={{post}}">{{post}}</a></li>
+            {% else %}
+              <li class="d-none d-sm-inline-block"><a href="?page={{post}}">{{post}}</a></li>
+            {% endif %}
+          {% endfor %}
+          </ul>
+
+          {% if posts.has_next %}
+            <a class="next-btn" href="?page={{ posts.next_page_number }}">صفحه بعد<i class="fe-icon-chevron-left"></i></a>
+            <a class="next-btn" href="?page={{ posts.paginator.num_pages }}">صفحه پایانی<i class="fe-icon-chevron-left"></i></a>
+          {% else %}
+            <span class="next-btn" href="">صفحه بعد<i class="fe-icon-chevron-left"></i></span>
+            <span class="next-btn" href="">صفحه پایانی<i class="fe-icon-chevron-left"></i></span>
+          {% endif %}
+        </nav>
+        <!-- Pagination Ends -->
+      </div>
+    </div>
+  </div>
+{% endblock %}

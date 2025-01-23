@@ -1,0 +1,165 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Akkase Kheyabani</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="CreateX - Multipurpose Bootstrap Theme">
+    <meta name="keywords" content="multipurpose, portfolio, blog, shop, e-commerce, modern, flat style, responsive,  business, corporate, mobile, bootstrap 4, html5, css3, jquery, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png' %}">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#343b43" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#603cba">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" href="{% static 'css/vendor/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/iziToast.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/noUISlider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/socicon.css' %}">
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="{% static 'css/theme.css' %}">
+    <!-- Modernizr-->
+    <script src="{% static 'js/modernizr.min.js' %}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <!-- Body-->
+  <body>
+    <div class="wrapper">
+      <!-- Navbar: Ghost White-->
+      <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
+      <header class="navbar-ghost navbar-ghost-white navbar-floating">
+        <div class="container text-center">
+          
+          {% block search %}
+          {% endblock search %}
+            
+          <a class="menu-trigger text-white" href="#fs-menu" data-toggle="fullscreen-overlay">
+            <span>منو</span>
+            <i class="fe-icon-menu"></i>
+          </a>
+          <a class="navbar-brand d-inline-block" href="{% url 'website:index'%}">
+            <img src="{% static 'img/logo/logo-light.png' %}" alt="Twin Design"/>
+          </a>
+        </div>
+      </header>
+        
+        <!-- Full Screen Menu-->  <div class="fs-overlay-wrapper" id="fs-menu" style="background-image: url({% static 'img/fs-overlay-bg.png' %});"><span class="fs-overlay-close"><i class="fe-icon-x"></i></span>
+      
+          <div class="fs-overlay-inner">
+            <div class="fs-overlay-content">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <ul class="list-unstyled">
+                      <li class="mb-0"><a class="dropdown-item lead py-2" href="{% url 'website:index' %}">صفحه اصلی</a></li>
+                      <li class="mb-0"><a class="dropdown-item lead py-2" href="{% url 'blog:blog' %}">وبلاگ</a></li>
+                      <li class="mb-0"><a class="dropdown-item lead py-2" href="{% url 'website:samples' %}">نمونه کارها</a></li>
+                      <li class="mb-0"><a class="dropdown-item lead py-2" href="{% url 'website:about' %}">درباره من</a></li>
+                      <li class="mb-0"><a class="dropdown-item lead py-2" href="{% url 'website:contact' %}">ارتباط با من</a></li>
+                      {% if request.user.is_authenticated %}
+                      <li class="mb-0"><a class="dropdown-item lead py-2" href="{% url 'accounts:profile' %}">حساب کاربری</a></li>
+                      <li class="mb-0"><a class="dropdown-item lead py-2" href="{% url 'accounts:logout' %}">خروج</a></li>
+                      {% else %}
+                      <li class="mb-0"><a class="dropdown-item lead py-2" href="{% url 'accounts:login' %}">ورود/عضویت</a></li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 d-none d-sm-block pt-3">
+                    <h6>تماس با ما</h6>
+                    <ul class="list-icon mb-4 pb-2">
+                      <li><i class="fe-icon-map-pin text-muted"></i>ایران -شهر </li>
+                      <li><i class="fe-icon-phone text-muted"></i>021-111111111</li>
+                      <li><i class="fe-icon-mail text-muted"></i>info@example.com</li>
+                    </ul>
+                    <h6 class="pb-2">شبکه های اجتماعی</h6><a class="social-btn sb-style-6 sb-facebook" href="#"><i class="socicon-facebook"></i></a><a class="social-btn sb-style-6 sb-dribbble" href="#"><i class="socicon-dribbble"></i></a><a class="social-btn sb-style-6 sb-twitter" href="#"><i class="socicon-twitter"></i></a><a class="social-btn sb-style-6 sb-linkedin" href="#"><i class="socicon-linkedin"></i></a><a class="social-btn sb-style-6 sb-youtube" href="#"><i class="socicon-youtube"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!-- Page Content-->
+        <!-- Hero-->
+        <section class="bg-center bg-no-repeat" style="height: 260px; background-color: #054c15;"></section>
+        
+    <!-- Content Begin -->
+      {% block content %}
+        
+      {% endblock content %}
+    <!-- Content Ends -->
+
+    <!-- Footer-->
+    <footer class="d-lg-flex align-items-center" style="background-color: #054c15;">
+        <div class="w-100 py-5 px-4">
+          <div class="mx-auto text-center" style="max-width: 340px;">
+            <ul class="list-unstyled text-white">
+              <li><span class='opacity-60'>شماره تماس:</span>۰۲۱۱۱۱۱۱۱۱۱</li>
+              <li><span class='opacity-60'>ایمیل:</span> info@example.com</li>
+            </ul>
+            <div class="widget pt-3 mb-4"><a class="social-btn sb-style-6 sb-facebook sb-light-skin" href="#"><i class="socicon-facebook"></i></a><a class="social-btn sb-style-6 sb-twitter sb-light-skin" href="#"><i class="socicon-twitter"></i></a><a class="social-btn sb-style-6 sb-dribbble sb-light-skin" href="#"><i class="socicon-dribbble"></i></a><a class="social-btn sb-style-6 sb-instagram sb-light-skin" href="#"><i class="socicon-instagram"></i></a><a class="social-btn sb-style-6 sb-behance sb-light-skin" href="#"><i class="socicon-behance"></i></a></div>
+            <p class="m-0 text-sm text-white"><span class="opacity-60">همه حقوق محفوظ است.© ساخته شده با</span> <i class='d-inline-block align-middle fe-icon-heart text-danger'></i> <a href="https://www.rtl-theme.com/" class="d-inline-block nav-link text-white opacity-60 p-0" target="_blank">راستچین</a></p>
+          </div>
+        </div>
+        <div class="w-100 py-5 px-4" style="background-color: #054c15;">
+          <div class="widget widget-gallery mb-0 mx-auto" style="max-width: 250px;">
+            <div class="d-flex justify-content-between"><a class="gallery-item mb-2 ml-2" href="{% static 'img/components/gallery/01.jpg' %}" data-fancybox="gallery1" data-options="{&quot;caption&quot;: &quot;Gallery Image Caption&quot;}"><img src="{% static 'img/widgets/gallery/th01.jpg' %}" alt="Gallery Image"/></a><a class="gallery-item mb-2 ml-2" href="{% static 'img/components/gallery/02.jpg' %}" data-fancybox="gallery1" data-options="{&quot;caption&quot;: &quot;Gallery Image Caption&quot;}"><img src="{% static 'img/widgets/gallery/th02.jpg' %}" alt="Gallery Image"/></a><a class="gallery-item type-video mb-2" href="https://www.youtube.com/watch?v=VE30ntVVfvAk&amp;amp;autoplay=1&amp;amp;rel=0&amp;amp;controls=0&amp;amp;showinfo=0" data-fancybox="gallery1" data-width="1000" data-height="563"><img src="{% static 'img/widgets/gallery/th03.jpg' %}" alt="Gallery Image"/></a></div>
+            <div class="d-flex justify-content-between"><a class="gallery-item mb-2 ml-2" href="{% static 'img/components/gallery/04.jpg' %}" data-fancybox="gallery1" data-options="{&quot;caption&quot;: &quot;Gallery Image Caption&quot;}"><img src="{% static 'img/widgets/gallery/th04.jpg' %}" alt="Gallery Image"/></a><a class="gallery-item type-video mb-2 ml-2" href="https://vimeo.com/25141497?color=ac32e4" data-fancybox="gallery1" data-width="1000" data-height="563"><img src="{% static 'img/widgets/gallery/th05.jpg' %}" alt="Gallery Image"/></a><a class="gallery-item mb-2" href="{% static 'img/components/gallery/06.jpg' %}" data-fancybox="gallery1" data-options="{&quot;caption&quot;: &quot;Gallery Image Caption&quot;}"><img src="{% static 'img/widgets/gallery/th06.jpg' %}" alt="Gallery Image"/></a></div>
+            <div class="pt-1"><a class="btn btn-gradient btn-block" href="#"><i class="fe-icon-instagram"></i>&nbsp;مشاهده اینستاگرام ما</a></div>
+          </div>
+        </div>
+        <div class="w-100 py-5 px-4">
+          <div class="mx-auto" style="max-width: 340px;">
+            <h6 class="text-sm font-weight-medium text-white text-uppercase text-center">مشترک شدن در خبرنامه</h6>
+            <p class="text-sm text-white opacity-60 text-center pb-1">برای با خبر شدن از وبلاگ ایمیل خود را وارد کنید.</p>
+            <form action="" method="post" target="_blank" novalidate>
+              <div class="input-group">
+                <input class="form-control form-control-light-skin placeholder-right text-left" type="email" name="EMAIL" placeholder="ایمیل خود را وارد کنید.">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">ثبت نام</button>
+                </div>
+              </div>
+              <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+              <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1">
+              </div>
+            </form>
+          </div>
+        </div>
+      </footer>
+    </div>
+      <!-- Back To Top Button--><a class="scroll-to-top-btn" href="#"><i class="fe-icon-chevron-up"></i></a>
+    <!-- Backdrop-->
+    <div class="site-backdrop"></div>
+    <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
+    <script src="{% static 'js/vendor/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/vendor/popper.min.js' %}"></script>
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/vendor/imagesloaded.min.js' %}"></script>
+    <script src="{% static 'js/vendor/isotope.min.js' %}"></script>
+    <script src="{% static 'js/vendor/iziToast.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'js/vendor/nouislider.min.js' %}"></script>
+    <script src="{% static 'js/vendor/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>
+
+        

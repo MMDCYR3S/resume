@@ -1,0 +1,12 @@
+<div class="widget widget-categories">
+  <h4 class="widget-title">دسته بندی ها</h4>
+  <ul>
+    {% for name, count in categories.items %}
+      {% if count > 0 %}
+        <li>
+          <a href="{% url 'blog:category' cat_name=name %}">{{ name }}<span>&nbsp;{{ count }}</span></a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

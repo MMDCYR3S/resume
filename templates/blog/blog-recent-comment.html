@@ -1,0 +1,10 @@
+<div class="widget widget-recent-comments">
+  <h4 class="widget-title">نظرات اخیر</h4>
+
+  {% for comment in comments %}
+    <a class="recent-comment" href="{% url 'blog:blog-detail' name=comment.post.title %}">
+    <span class="recent-comment-meta">{{comment.name}}</span>
+    <div class="recent-comment-title">{{comment.post.title}}</div>
+    </a>
+   {% endfor %}
+</div>

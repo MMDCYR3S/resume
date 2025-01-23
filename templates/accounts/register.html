@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="container box-shadow position-relative pt-4 mb-4 text-center" style="margin-top: -160px; z-index: 5;">
+    <div class="row">
+      <div class="bg-white box-shadow pt-4 pb-4 px-3 px-sm-4 col-lg-12">
+        <form class="needs-validation wizard" method="POST">
+          {% csrf_token %}
+          <div class="wizard-body pt-2">
+            <h3 class="h5 pt-4 pb-2">ثبت نام در وبسایت</h3>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fe-icon-mail"></i></span>
+              </div>
+              <input class="form-control text-left placeholder-right" type="email" name="email" placeholder="ایمیل" />
+            </div>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fe-icon-lock"></i></span>
+              </div>
+              <input class="form-control" type="password" name="password1" placeholder="رمز عبور" />
+            </div>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fe-icon-lock"></i></span>
+              </div>
+              <input class="form-control" type="password" name="password2" placeholder="تکرار رمز عبور" />
+            </div>
+          </div>
+          <div class="wizard-footer text-right">
+            <button class="btn btn-primary col-md-2" type="submit">ثبت نام</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

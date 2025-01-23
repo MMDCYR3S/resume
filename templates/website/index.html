@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block search %}
+<!-- Search Button -->
+<a class="search-trigger text-white" href="#fs-search" data-toggle="fullscreen-overlay">
+  <i class="fe-icon-search"></i>
+</a>
+
+<!-- Full Screen Search-->
+<div class="fs-overlay-wrapper" id="fs-search" style="background-image: url({% static 'img/fs-overlay-bg.png' %});"><span class="fs-overlay-close"><i class="fe-icon-x"></i></span>
+  <div class="fs-overlay-inner">
+    <div class="fs-overlay-content">
+      <div class="container">
+        <form class="input-group" action="{% url 'website:search' %}" method="get">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fe-icon-search"></i></div>
+          </div>
+          <input class="form-control" type="text" name="s" placeholder="جستجو در سایت ...">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+  
+
+{% block content %}
+      <!-- Page Content -->
+      <div class="container" style="margin-top: -160px;">
+        <div class="bg-white box-shadow pt-4 pb-5 px-3 px-sm-4">
+          <figure class="figure d-block rounded-circle my-3 p-2 mx-auto" style="width: 180px;"><img class="d-block w-100 rounded-circle" src="{{profile.image.url}}" alt="Farzin Abedini"></figure>
+          <div class="text-center">
+            <p class="text-xl text-muted font-weight-medium mb-2">سایت رزومه</p>
+            <h1 class="h3 block-title">نام و نام خانوادگی</h1>
+            <ul class="text-lg list-inline py-3 pr-0">
+              <li class="mx-2 font-weight-medium align-middle"><i class="d-inline-block fe-icon-map-pin align-middle text-muted"></i>&nbsp;ایران - شهر</li>
+              <li class="mx-2 font-weight-medium align-middle"><i class="d-inline-block fe-icon-mail align-middle text-muted"></i>&nbsp;info@gmail.com</li>
+            </ul>
+            <div class="d-inline-block align-middle mx-2 mb-3"><img class="d-block" src="{% static 'img/homepages/personal-blog/followers.png' %}" width="126" alt="Followers"></div><span class="d-inline-block align-middle text-muted font-weight-medium mb-3">12k دنبال کننده</span><a class="btn btn-gradient btn-sm mx-3 mb-3" href="#"><i class="fe-icon-user-plus"></i>&nbsp;دنبال کردن</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Posts -->
+      <section class="container pt-5 pb-4">
+        <h3 class="h4 block-title text-center">نوشته ها</h3>
+        <div class="row pt-3">
+          {% for post in posts %}
+          <div class="col-md-4 col-sm-6">
+            <a class="d-block position-relative text-decoration-none text-center py-5" href="{% url 'blog:blog-detail' name=post.title %}">
+              <div class="img-cover" style="background-image: url({{post.image.url}});"></div>
+              <div class="bg-content pt-5 mt-5"></div>
+            </a>
+            <div class="portfolio-card">
+              <div class="portfolio-card-body">
+                <div class="portfolio-meta">
+                  <span class="ml-3"><i class="fe-icon-calendar"></i>{{ post.published_date|date:"d F Y" }}</span>
+                  <span class="ml-3"><i class="fe-icon-eye"></i>{{ post.counted_views }}</span>
+                  <a href="#"><i class="fe-icon-heart text-accent"></i>{{post.counted_likes}}</a>
+                </div>
+                <h5 class="portfolio-title"><a href="{% url 'blog:blog-detail' name=post.title %}">{{ post.title }}</a></h5>
+                {% for cat in post.categories.all %}
+                  <a class="tag-link" href="{% url 'blog:category' cat_name=cat %}">{{ cat }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="container bg-white box-shadow py-5 text-center">
+            <p class="h3">پستی یافت نشد!</p>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Portfolio-->
+      <section class="container-fluid">
+        <h3 class="h4 block-title text-center">نمونه کارها</h3>
+          <div class="isotope-grid cols-4 pt-3">
+            <div class="gutter-sizer"></div>
+            <div class="grid-sizer"></div>
+            
+          {% for photo in photos %}
+              <div class="grid-item"><a class="gallery-item" href="{{photo.image.url}}" data-fancybox="gallery" data-options="{&quot;caption&quot;: &quot;{{photo.title}}&quot;}"><img src="{{photo.image.url}}" alt="{{photo.title}}"/></a></div> 
+          {% empty %}
+            <div class="container bg-white box-shadow py-5 text-center">
+              <p class="h3">نمونه کاری برای نمایش یافت نشد!</p>
+            </div>
+          {% endfor %}
+          </div>
+          <div class="text-center mb-5">
+            <p class="h3">...</p>
+            <a href="{% url 'website:samples' %}"><button class="btn btn-gradient" type="submit">نمونه کارهای بیشتر</button></a>
+          </div>
+      </section>
+
+      <!-- Contact Form-->
+      <section class="container box-shadow position-relative pt-4 mb-4" style="z-index: 5;">
+        <div class="bg-white box-shadow pt-3 pb-5 px-3 px-sm-4">
+          <h2 class="h4 block-title text-center">با من در تماس باشید</h2>
+          <form class="needs-validation pt-4" novalidate>
+            <div class="row">
+              <div class="col-lg-4 col-md-6">
+                <div class="form-group">
+                  <label for="cont-name">نام <strong class='text-danger'>*</strong></label>
+                  <input class="form-control" type="text" id="cont-name" required>
+                  <div class="invalid-feedback">لطفا نام خود را وارد کنید!</div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="form-group">
+                  <label for="cont-email">ایمیل <strong class='text-danger'>*</strong></label>
+                  <input class="form-control text-left placeholder-right" type="email" id="cont-email" required>
+                  <div class="invalid-feedback">لطفا آدرس ایمیل معتبر وارد کنید!</div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="cont-subject">موضوع</label>
+                  <input class="form-control" type="text" id="cont-subject">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cont-message">پیام <strong class='text-danger'>*</strong></label>
+              <textarea class="form-control" id="cont-message" rows="10" required></textarea>
+              <div class="invalid-feedback">لطفا پیام خود را بنویسید</div>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-gradient" type="submit">ارسال پیام</button>
+            </div>
+          </form>
+        </div>
+      </section>
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block search %}
+<!-- Search Button -->
+<a class="search-trigger text-white" href="#fs-search" data-toggle="fullscreen-overlay">
+  <i class="fe-icon-search"></i>
+</a>
+
+<!-- Full Screen Search-->
+<div class="fs-overlay-wrapper" id="fs-search" style="background-image: url({% static 'img/fs-overlay-bg.png' %});"><span class="fs-overlay-close"><i class="fe-icon-x"></i></span>
+  <div class="fs-overlay-inner">
+    <div class="fs-overlay-content">
+      <div class="container">
+        <form class="input-group" action="{% url 'website:search' %}" method="get">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fe-icon-search"></i></div>
+          </div>
+          <input class="form-control" type="text" name="s" placeholder="جستجو در سایت ...">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<section class="container mb-4" style="margin-top: -160px;">
+    <div class="bg-white box-shadow pt-4 pb-5 px-3 px-sm-4">
+        <div class="text-center mb-4">
+            <p class="text-xl text-muted font-weight-medium mb-2">&nbsp;نمونه کارها</p>
+            <h1 class="h3 block-title">نام ونام خانوادگی</h1>
+        </div>
+        <div class="isotope-grid cols-4">
+            <div class="gutter-sizer"></div>
+            <div class="grid-sizer"></div>
+
+            
+            {% for photo in photos %}
+            <div class="grid-item">
+                <a class="gallery-item" href="{{photo.image.url}}" data-fancybox="gallery" data-options="{&quot;caption&quot;: &quot;{{photo.title}}&quot;}">
+                    <img src="{{photo.image.url}}" alt="{{photo.title}}"/>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock  %}

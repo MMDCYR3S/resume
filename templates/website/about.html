@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block search %}
+<!-- Search Button -->
+<a class="search-trigger text-white" href="#fs-search" data-toggle="fullscreen-overlay">
+  <i class="fe-icon-search"></i>
+</a>
+
+<!-- Full Screen Search-->
+<div class="fs-overlay-wrapper" id="fs-search" style="background-image: url({% static 'img/fs-overlay-bg.png' %});"><span class="fs-overlay-close"><i class="fe-icon-x"></i></span>
+  <div class="fs-overlay-inner">
+    <div class="fs-overlay-content">
+      <div class="container">
+        <form class="input-group" action="{% url 'website:search' %}" method="get">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fe-icon-search"></i></div>
+          </div>
+          <input class="form-control" type="text" name="s" placeholder="جستجو در سایت ...">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+  <!-- Page Content -->
+  <div class="container mb-5" style="margin-top: -160px;">
+    <div class="bg-white box-shadow pt-4 pb-5 px-3 px-sm-4">
+      <figure class="figure d-block rounded-circle my-3 p-2 mx-auto" style="width: 180px;">
+        <img class="d-block w-100 rounded-circle" src="{{profile.image.url}}" alt="James Smith" />
+      </figure>
+      <div class="text-center">
+        <p class="text-xl text-muted font-weight-medium mb-2">سایت رزومه</p>
+        <h1 class="h3 block-title">نام و نام خانوادگی</h1>
+        <p class="h6 block-title">اینجا میتوانید شرح حال خود را وارد کنید.</p>
+        <ul class="text-lg list-inline py-3 pr-0">
+          <li class="mx-2 font-weight-medium align-middle">
+            <i class="d-inline-block fe-icon-map-pin align-middle text-muted"></i>&nbsp;ایران - شهر
+          </li>
+          <li class="mx-2 font-weight-medium align-middle">
+            <i class="d-inline-block fe-icon-mail align-middle text-muted"></i>&nbsp;info@gmail.com
+          </li>
+        </ul>
+        <div class="d-inline-block align-middle mx-2 mb-3">
+          <img class="d-block" src="{% static 'img/homepages/personal-blog/followers.png' %}" width="126" alt="Followers" />
+        </div><span class="d-inline-block align-middle text-muted font-weight-medium mb-3">12k دنبال کننده</span><a class="btn btn-gradient btn-sm mx-3 mb-3" href="#"><i class="fe-icon-user-plus"></i>&nbsp;دنبال کردن</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
